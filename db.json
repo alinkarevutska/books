@@ -1,3 +1,20 @@
 {
-  "books": []
+  "books": [
+    {
+      "title": "Harry Potter",
+      "id": 1
+    },
+    {
+      "title": "Hunger games",
+      "id": 3
+    },
+    {
+      "title": "Dandelion wine",
+      "id": 4
+    },
+    {
+      "title": "Random book",
+      "id": 5
+    }
+  ]
 }
