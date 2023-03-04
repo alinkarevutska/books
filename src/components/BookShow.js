@@ -1,12 +1,13 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import BookEdit from './BookEdit';
+import BooksContext from '../context/books';
 
-const BookShow = ({book, onDelete, onEdit}) => {
+const BookShow = ({book}) => {
     const [showEdit, setShowEdit] = useState(false);
+    const {deleteBookById} = useContext(BooksContext);
 
     const handleDeleteClick = () => {
-        onDelete(book.id) // we are not calling onDelete func immediately!! 
+        deleteBookById(book.id) // we are not calling onDelete func immediately!! 
         // we use event handler to pass book.id value to onDelete func
     };
 
@@ -14,9 +15,8 @@ const BookShow = ({book, onDelete, onEdit}) => {
         setShowEdit(!showEdit) // set opposite value to current ShowEdit value
     };
 
-    const handleSubmit = (id, newTitle) => {
+    const handleSubmit = () => {
         setShowEdit(false); // closing an edit form after submit
-        onEdit(id, newTitle); // receiving a particular book data from the child component and running a book title editing process in App.js
     };
 
     let content = <h3>{book.title}</h3>
