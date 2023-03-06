@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useCallback } from "react";
 import axios from 'axios';
 
 const BooksContext = createContext();
@@ -6,10 +6,12 @@ const BooksContext = createContext();
 function Provider({children}) {
     const [books, setBooks] = useState([]);
 
-    const fetchBooks = async () => {
+    const fetchBooks = useCallback(async () => {
     const responce = await axios.get('http://localhost:3001/books');
     setBooks(responce.data);
-    };
+    }, []); // the more common approach is just wrapping the entire fetchBooks func in useCallback and adding an empty array as a second argument
+
+    // it's equal to const stableFetchBooks = useCallback(fetchBooks, []);
 
     const deleteBookById = async (id) => {
         await axios.delete(`http://localhost:3001/books/${id}`);
